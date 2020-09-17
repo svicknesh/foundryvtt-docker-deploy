@@ -1,0 +1,6 @@
+{
+	http_port 80
+	https_port 443
+}
+
+import /etc/caddy/config.d/*.conf

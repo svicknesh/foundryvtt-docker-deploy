@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+
+  default:
+    build: build
+    container_name: foundryvtt 
+    volumes:
+      - ./data/default:/data 
+    ports:
+      - 30001:30000 
+    restart: unless-stopped
+
