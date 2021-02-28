@@ -75,12 +75,11 @@ unzip $HOME/foundryvtt-0.6.6.zip -d $HOME/docker/foundryvtt/build/latest
 
 ### Customization
 
-The default setup is sufficient for a single use deployment. If the need arises to run multiple instances for co-hosting them on a single server.
-
-Edit `$HOME/docker/foundryvtt/docker-compose.yml` and add the following at the end of the file, matching the indentation of the existing `default` content in the file
+The default setup is sufficient for a single use deployment. If the need arises to run multiple instances for co-hosting them on a single server, edit `$HOME/docker/foundryvtt/docker-compose.yml` and add the following at the end of the file, matching the indentation of the existing `default` content in the file
 
 ```yaml
 <instance_name>:
+    container_name: <instance_name>
     volumes:
       - ./data/<data_folder>:/data 
     ports:
@@ -124,7 +123,7 @@ To have FoundryVTT securely accessible anywhere from the world, I recommend usin
 
 This requires you to have a valid domain name that you can control. There are many providers for domain names that offer it cheaply.
 
-The instructions below can be used on any Linux distributions. Run the following commands as the `root` user.
+The instructions below can be used on any Linux distributions. The following commands require `root` privileges therefore they're prefixed with `sudo`.
 
 
 ### Caddy v2
@@ -159,7 +158,7 @@ The instructions below can be used on any Linux distributions. Run the following
     sudo cp $HOME/docker/foundryvtt/caddy/foundryvtt.conf /etc/caddy/config.d/foundryvtt.conf
     ```
 
-6. Edit the `/etc/caddy/config.d/foundryvtt.conf` config file and change `https://foundryvtt.example.com:30001` to your own domain name and port number. Change `30001` in the line `reverse_proxy * http://localhost:30001` to the port number used during the docker configuration. Save and quit the file.
+6. Edit the `/etc/caddy/config.d/foundryvtt.conf` config file and change `https://foundryvtt.example.com:30000` to your own domain name and port number. Change `30001` in the line `reverse_proxy * http://localhost:30001` to the port number used during the docker configuration. Save and quit the file.
 
 7. Start caddy
     ```bash
@@ -167,4 +166,4 @@ The instructions below can be used on any Linux distributions. Run the following
     sudo systemctl start caddy
     ```
 
-8. Visit `https://foundryvtt.example.com:30001` on your browser and you will be presented with your FoundryVTT secured using TLS.
+8. Visit `https://foundryvtt.example.com:30000` on your browser and you will be presented with your FoundryVTT secured using TLS.
